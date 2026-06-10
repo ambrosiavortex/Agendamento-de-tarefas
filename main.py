@@ -4,6 +4,8 @@ dias = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-
 horarios = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
 exames_agendados = [] #Dicionário para armazenar os exames agendados
 
+id = 0 #Variável para ids
+
 #Função de menu para o usuário
 def menu():
     print ("1. Agendar exame")
@@ -29,18 +31,37 @@ def agendar_exame():
         print ("Horário inválido. Tente novamente.")
         return
     
-    exame = {"dia": dia, "horario": horario, "paciente": paciente}
+    id += 1 
+
+    exame = {"id": id, "dia": dia, "horario": horario, "paciente": paciente}
     if exame in exames_agendados:
         print ("Exame já agendado para esse dia e horário. Tente novamente.")
         return
     exames_agendados.append(exame)
-    print ("Exame agendado com sucesso.") 
 
+    print ("Exame agendado com sucesso." exame.id, exame.dia, exame.horario, exame.paciente)
+
+#Função para cancelar exame
+def cancelar_exame():
+    print ("Cancelamento de exames.")
+
+    id_exame = input ("Digite o id do exame cancelável: ")
+
+    for exame in exames_agendados:
+        if id_exame == exame.id:
+            exames_agendados.pop(exames_agendados.index(exame))
+
+    print ("Exame cancelado com sucesso!")
+
+#Loop do menu
 while True:
     opcao = menu()
 
     match opcao:
         case 1:
             agendar_exame()
+        case 2:
+            cancelar_exame()
+    
 
      
