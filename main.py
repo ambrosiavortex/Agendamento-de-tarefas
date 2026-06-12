@@ -2,13 +2,15 @@ print ("Agendamento de exames.")
 
 dias = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]
 horarios = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
-exames_agendados = [] #Dicionário para armazenar os exames agendados
+exames_agendados = [] #Lista para armazenar os exames agendados
+
+exames_agendados.append({"id": 1, "dia": "Segunda-feira", "horario": "08:00", "paciente": "Light Yagami"})
 
 #Função de menu para o usuário
 def menu():
     print ("1. Agendar exame")
-    print ("2. Listar exames")
-    print ("3. Cancelar exame")
+    print ("2. Cancelar exame")
+    print ("3. Listar exames")
     print ("4. Sair")
     opcao = input ("Escolha uma opção: ")
     return opcao
@@ -38,7 +40,7 @@ def agendar_exame():
         return
     exames_agendados.append(exame)
 
-    print ("Exame agendado com sucesso. {exame}")
+    print (f"Exame agendado com sucesso.{exame}")
 
 #Função para cancelar exame
 def cancelar_exame():
@@ -47,8 +49,8 @@ def cancelar_exame():
     id_exame = input ("Digite o id do exame cancelável: ")
 
     for exame in exames_agendados:
-        if id_exame == exame.id:
-            exames_agendados.pop(exames_agendados.index(exame))
+        if id_exame == exame["id"]:
+            exames_agendados.remove(exame)
 
     print ("Exame cancelado com sucesso!")
 
@@ -68,12 +70,9 @@ while True:
     match opcao:
         case "1":
             agendar_exame()
-            break
         case "2":
             cancelar_exame()
-            break
         case "3":
             listar_exames()
-            break
         case "4":
             break
